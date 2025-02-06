@@ -1,9 +1,12 @@
-from Model import Helm
+from Model import Helm  # Wir importieren das Helm-Modul, damit wir Helme erstellen können.
 
 """
-Ein script als eine Art Datenbank
+Dieses Skript funktioniert wie eine kleine Datenbank für Helme.
+Hier speichern wir viele verschiedene Helme mit ihren Eigenschaften.
 """
 
+# Ein Wörterbuch (Dictionary), das verschiedene Helme speichert.
+# Jeder Helm hat einen Namen als Schlüssel und ein Helm-Objekt als Wert.
 helme = {
     "Storm Racer": Helm.Helm("Storm Racer", "M", 5, 150, "Sport", "Ratsche", "Polycarbonat"),
     "Mountain King": Helm.Helm("Mountain King", "L", 2, 220, "Enduro", "Doppel-D", "Carbon"),

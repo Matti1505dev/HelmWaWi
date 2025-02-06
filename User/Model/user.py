@@ -1,22 +1,18 @@
-from ShoppingCart.shoppingCart import shoppingCart
-import os
-path = os.path.join("./../", "user.txt")
+from ShoppingCart.shoppingCart import ShoppingCart  # Importiert die Einkaufswagen-Klasse.
 
-class user():
+class User():
+    """
+    Diese Klasse erstellt einen Benutzer mit persönlichen Daten und einem Einkaufswagen.
+    """
+
     def __init__(self, email, name, password, adresse, tel):
-        self.shoppingCart = shoppingCart()
-        self.email = email
-        self.name = name
-        self.password = password
-        self.adresse = adresse
-        self.tel = tel
-
-    def speichern(self):
-        print(path)
-        save = open(path,"+a")
-        try:
-            save.writelines([f"{self.name}\n",f"{self.email}\n",f"{self.name}\n",f"{self.password}\n",f"{self.adresse}\n",f"{self.tel}\n"] )
-            save.close()
-        except Exception as error:
-            print(error)
-            save.close()
+        """
+        Diese Funktion wird aufgerufen, wenn ein neuer Benutzer erstellt wird.
+        Sie speichert die Benutzerdaten und gibt ihm einen Einkaufswagen.
+        """
+        self.shoppingCart = ShoppingCart()  # Jeder Benutzer bekommt seinen eigenen Einkaufswagen.
+        self.email = email  # E-Mail-Adresse des Benutzers.
+        self.name = name  # Name des Benutzers.
+        self.password = password  # Passwort für das Benutzerkonto.
+        self.adresse = adresse  # Wohnadresse des Benutzers.
+        self.tel = tel  # Telefonnummer des Benutzers.

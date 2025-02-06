@@ -1,81 +1,84 @@
-from Model import Helm # Import des Helmscripts vom Modelmodul
-from Model import HelmBestand # Import des HelmBestandscript vom Modelmodul
+# Wir importieren zwei Module aus dem Model-Ordner:
+from Model import Helm  # Das Helm-Modul enthält verschiedene Helmeigenschaften.
+from Model import HelmBestand  # Das HelmBestand-Modul enthält eine Liste aller Helme.
 
-groesse = ""
-preis = ""
-kategorie = ""
-verschluss = ""
-material = ""
+# Variablen für die Eigenschaften eines Helms
+groesse = ""  # Größe des Helms
+preis = ""  # Preis des Helms
+kategorie = ""  # Kategorie des Helms (z. B. Fahrradhelm, Motorradhelm)
+verschluss = ""  # Verschlussart des Helms (z. B. Schnalle, Magnet)
+material = ""  # Material des Helms (z. B. Kunststoff, Carbon)
 
-HelmKategorien : str = ""
-HelmSize = ""
-HelmLock = ""
-HelmMaterial = ""
+# Strings, die später mit Helm-Optionen gefüllt werden
+HelmKategorien: str = ""  # Speichert eine Liste aller Kategorien
+HelmSize = ""  # Speichert eine Liste aller Größen
+HelmLock = ""  # Speichert eine Liste aller Verschlüsse
+HelmMaterial = ""  # Speichert eine Liste aller Materialien
 
+# Liste, um passende Helme zu speichern
 ConfirmedHelmet = []
 
 def generateHelmCategories():
     """
-    Diese Methode generiert aus der Variabel Helmkategorien aus dem Helmscript
-    einen String mit einer zahlen + Kategorie Auswahl. 
+    Diese Funktion erstellt eine Liste mit allen Helm-Kategorien und nummeriert sie.
+    So kann man später leichter eine Kategorie auswählen.
     """
-    global HelmKategorien
-    index = 0
-    for helmKategorie in Helm.HelmKategorien:
-        HelmKategorien += str(index) + f". {helmKategorie}\n"
-        index += 1
+    global HelmKategorien  # Wir greifen auf die globale Variable zu.
+    index = 0  # Startwert für die Nummerierung
+    for helmKategorie in Helm.HelmKategorien:  # Wir gehen alle Helm-Kategorien durch.
+        HelmKategorien += str(index) + f". {helmKategorie}\n"  # Nummer + Kategorie hinzufügen
+        index += 1  # Nummer um 1 erhöhen
 
 def generateHelmSize():
     """
-    Diese Methode generiert aus der Variabel HelmSize aus dem Helmscript
-    einen String mit einer zahlen + Kategorie Auswahl. 
+    Diese Funktion erstellt eine nummerierte Liste mit allen verfügbaren Helmgrößen.
     """
     global HelmSize
     index = 0
-    for helmSize in Helm.HelmSize:
+    for helmSize in Helm.HelmSize:  # Wir gehen alle Größen durch.
         HelmSize += str(index) + f". {helmSize}\n"
         index += 1
 
 def generateHelmLock():
     """
-    Diese Methode generiert aus der Variabel HelmVerschluss aus dem Helmscript
-    einen String mit einer zahlen + Kategorie Auswahl. 
+    Diese Funktion erstellt eine nummerierte Liste mit allen Helmverschlüssen.
     """
     global HelmLock
     index = 0
-    for helmLock in Helm.HelmVerschluss:
+    for helmLock in Helm.HelmVerschluss:  # Wir gehen alle Verschlussarten durch.
         HelmLock += str(index) + f". {helmLock}\n"
         index += 1
 
 def generateHelmMaterial():
     """
-    Diese Methode generiert aus der Variabel HelmMaterial aus dem Helmscript
-    einen String mit einer zahlen + Kategorie Auswahl. 
+    Diese Funktion erstellt eine nummerierte Liste mit allen Helm-Materialien.
     """
     global HelmMaterial
     index = 0
-    for helmMaterial in Helm.HelmMaterial:
+    for helmMaterial in Helm.HelmMaterial:  # Wir gehen alle Materialien durch.
         HelmMaterial += str(index) + f". {helmMaterial}\n"
         index += 1
 
 def getHelmets():
     """
-    Diese Methode checkt, ob ein Helm aus dem helme script aus dem Helmbestand modul 
-    der Auswahl entspricht und fügt diese entsprechend der ConfirmedHelmet Liste zu
+    Diese Funktion sucht passende Helme basierend auf der Benutzer-Auswahl.
+    Es wird überprüft, ob der Helm zur gewählten Kategorie, Größe, Material und Verschlussart passt.
+    Wenn der Helm verfügbar ist und der Preis passt, wird er zur Liste 'ConfirmedHelmet' hinzugefügt.
     """
-    for key in HelmBestand.helme:
-        helm = HelmBestand.helme[key]
-        if helm.art == kategorie and helm.groesse == groesse and helm.material == material and helm.verschluss == verschluss and helm.preis <= preis and helm.warenbestand > 0:
-            ConfirmedHelmet.append(key)
+    for key in HelmBestand.helme:  # Wir gehen alle Helme aus dem Bestand durch.
+        helm = HelmBestand.helme[key]  # Der aktuelle Helm
+        # Überprüfung, ob der Helm zur Auswahl passt und auf Lager ist.
+        if (helm.art == kategorie and helm.groesse == groesse and 
+            helm.material == material and helm.verschluss == verschluss and 
+            helm.preis <= preis and helm.warenbestand > 0):
+            ConfirmedHelmet.append(key)  # Helm wird zur Liste hinzugefügt.
 
 def generateStrings():
     """
-    Diese Methode ist eine Sammelmethode um alle Methoden auf zu rufen, die Strings generieren.
-    Eine Art Initialisierung
+    Diese Funktion ruft alle Funktionen auf, die Listen mit Helm-Optionen erstellen.
+    Sie dient als Start-Funktion, damit alle Optionen bereitstehen.
     """
-
     generateHelmCategories()
     generateHelmLock()
     generateHelmMaterial()
     generateHelmSize()
-
